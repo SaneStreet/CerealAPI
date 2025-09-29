@@ -1,0 +1,6 @@
+DBParser/bin/
+DBParser/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
