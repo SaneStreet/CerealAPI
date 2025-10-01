@@ -1,6 +1,11 @@
-DBParser/bin/
-DBParser/obj/
+DBParser/bin/*
+DBParser/obj/*
+CerealAPI/obj/*
+CerealAPI/bin/*
+CerealAPI/appsettings.Development.json
+
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
+*.vs/
