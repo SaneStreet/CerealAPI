@@ -1,4 +1,4 @@
-@CerealAPI_HostAddress = http://localhost:5183
+@CerealAPI_HostAddress = http://localhost:5555
 
 GET {{CerealAPI_HostAddress}}/weatherforecast/
 Accept: application/json
