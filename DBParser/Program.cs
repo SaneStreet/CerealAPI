@@ -23,22 +23,6 @@ using var conn = new MySqlConnection(connStr);
 conn.Open();
 Console.WriteLine(" Forbindelse oprettet.");
 
-/* bool tableExists;
-string sqlStatement = @"SELECT Count(*) from `cerealdb`";
-var cmd = new MySqlCommand(connStr, conn);
-try
-{
-    using (cmd)
-    {
-        cmd.ExecuteNonQuery();
-        tableExists = true;
-    }
-}
-catch
-{
-    tableExists = false;
-} */
-
 // Opretter en ny tabel til data (cereal)
 Console.WriteLine("  Opretter tabel..");
 MySqlCommand createTable = new MySqlCommand(@"
@@ -94,15 +78,16 @@ while (!reader.EndOfStream)
     int shelf = int.Parse(values[12].Trim(), CultureInfo.InvariantCulture);
     float weight = float.Parse(values[13].Trim(), CultureInfo.InvariantCulture);
     float cups = float.Parse(values[14].Trim(), CultureInfo.InvariantCulture);
+    float rating = float.Parse(values[15].Trim(), CultureInfo.InvariantCulture);
 
     // Pga. flere "." i rating, så må vi fjerne dem for at de kan indlæses i DB
-    string rawRating = values[15].Trim();
+    /*string rawRating = values[15].Trim();
     string cleaned = rawRating.Replace(".", "");
 
     if (!float.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out float rating))
     {
         Console.WriteLine($"Kunne ikke parse rating: {rawRating}");
-    }
+    }*/
 
     // Strengen der indsætter data med værdier
     string sql = @"INSERT INTO cereal
