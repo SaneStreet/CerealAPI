@@ -5,6 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddDbContext<CerealDbContext>(options =>
+{
+    //string connStr = "Server=localhost;Database=cerealdb;User=root;Password=123456";
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

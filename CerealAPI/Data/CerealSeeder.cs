@@ -1,19 +1,14 @@
+using System.Globalization;
+
 public static class CerealSeeder
 {
-
-    private static float ParseFloat(string str)
-    {
-        // Fjern tusindtals-separatorer
-        var clean = str.Replace(".", "").Replace(",", ".");
-        return float.TryParse(clean, out float val) ? val : 0;    
-    }
     public static void SeedProducts(CerealDbContext context, string csvFilePath)
     {
 
         if (!File.Exists(csvFilePath))
             throw new FileNotFoundException("CSV filen blev ikke fundet", csvFilePath);
 
-        var lines = File.ReadAllLines(csvFilePath).Skip(1); // Skipper header
+        var lines = File.ReadAllLines(csvFilePath).Skip(2); // Skipper header
 
         foreach (var line in lines)
         {
@@ -39,13 +34,13 @@ public static class CerealSeeder
                 Vitamins = int.Parse(parts[11].Trim()),
                 Shelf = int.Parse(parts[12].Trim()),
                 Weight = float.Parse(parts[13].Trim()),
-                Cups = float.Parse(parts[14].Trim()),
-                Rating = ParseFloat(parts[15].Trim())
+                Cups = float.Parse(parts[14].Trim(), CultureInfo.InvariantCulture),
+                Rating = float.Parse(parts[15].Trim(), CultureInfo.InvariantCulture)
 
             };
 
             // Kun tilføj hvis produktet ikke findes i forvejen
-            if (!context.Cereal.Any(p => p.Name == cereal.Name))
+            if (!context.Cereal.Any(c => c.Name == cereal.Name))
             {
                 context.Cereal.Add(cereal);
             }
