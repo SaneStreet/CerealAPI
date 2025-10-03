@@ -2,6 +2,15 @@
 
 Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumentere den med Swagger.
 
+## API Endpoints
+| Metode | Endpoint            | Beskrivelse           | Body (JSON) eksempel                                 |
+| ------ | ------------------- | --------------------- | ---------------------------------------------------- |
+| GET    | `/api/cereals`      | Hent alle cereals     | –                                                    |
+| GET    | `/api/cereals/{id}` | Hent en cereal via Id | –                                                    |
+| POST   | `/api/cereals`      | Opret en ny cereal    | `{ "name": "Corn Flakes", "calories": 120 }`         |
+| PUT    | `/api/cereals/{id}` | Opdater en cereal     | `{ "id": 1, "name": "Choco Pops", "calories": 200 }` |
+| DELETE | `/api/cereals/{id}` | Slet en cereal        | –                                                    |
+
 ## 🚀 Teknologier
 
 - ASP.NET Core Web API
@@ -42,34 +51,6 @@ https://localhost:5555/swagger
 ```
 Her kan du se og teste alle endpoints i browseren.
 
-## 🗂 Eksempel: Model og Endpoint
-<b>Model (Cereal.cs)</b>:
-```
-public class Cereal
-{
-    public int Id {get; set;}
-    public string Name {get; set;}
-    public float Calories {get; set;}
-}
-```
-<b>Controller (CerealsController.cs)</b>:
-```
-[ApiController]
-[Route("api/[controller]")]
-public class CerealsController : ControllerBase
-{
-    private readonly AppDbContext _context;
-
-    public CerealsController(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cereal>>> GetCereals()
-        => await _context.Cereals.ToListAsync();
-}
-```
 ## 🧪 Test
 
 Kald API’et fra terminalen:
