@@ -40,9 +40,9 @@ public static class CerealSeeder
             };
 
             // Kun tilføj hvis produktet ikke findes i forvejen
-            if (!context.Cereal.Any(c => c.Name == cereal.Name))
+            if (!context.Cereals.Any(c => c.Name == cereal.Name))
             {
-                context.Cereal.Add(cereal);
+                context.Cereals.Add(cereal);
             }
         }
 

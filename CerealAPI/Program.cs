@@ -2,13 +2,15 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddScoped<ICerealRepository, CerealRepository>();
+// henter connectionString
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Tilføjer DbContext med MySQL
 builder.Services.AddDbContext<CerealDbContext>(options =>
 {
-    //string connStr = "Server=localhost;Database=cerealdb;User=root;Password=123456";
-    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -24,14 +26,14 @@ using (var scope = app.Services.CreateScope())
     CerealSeeder.SeedProducts(db, "Data/Cereal.csv");
 }
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.MapOpenApi();
-        // Swagger 
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    // Swagger 
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
