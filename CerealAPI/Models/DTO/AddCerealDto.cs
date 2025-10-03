@@ -1,13 +1,13 @@
 /*
-    Model (Dataskabelon):
-        - Klasse der beskriver hvordan data ser ud i databasen
-        - Bruges af Entity Framework til at mappe mellem databasen og C#-objekter
+    Data Transferable Object:
+        - En "ren" klasse til at sende data gennem API
+        - Må ikke indeholde Id, da det typisk har Auto-Increment (Auto-Indsæt)
+        - Beskytter database-modellen og gør API mere fleksibelt
 */
 
-public class Cereal
+public class AddCerealDto
 {
-    // Indsæt alle værdierne der er vigtige for databasen
-    public int Id { get; set; }
+    // Værdier der er vigtige for databasen. VIGTIGT: Intet Id, ellers så fejl indlæses data
     public string? Name { get; set; }
     public string? Mfr { get; set; }
     public string? Type { get; set; }

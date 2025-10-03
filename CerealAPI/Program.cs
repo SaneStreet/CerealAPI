@@ -4,25 +4,26 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddScoped<ICerealRepository, CerealRepository>();
-// henter connectionString
+// Tilføjer Swagger Gen
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+// Henter ConnectionString
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Tilføjer DbContext med MySQL
 builder.Services.AddDbContext<CerealDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
-// Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+// Bygger applikationen
 var app = builder.Build();
 
+// Sætter scope på hvilken database og migrationer der skal bruges
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CerealDbContext>();
-    db.Database.Migrate(); // Opdater DB
-
+    db.Database.Migrate();
+    // Tilføjer data fra .CSV ind i DB
     CerealSeeder.SeedProducts(db, "Data/Cereal.csv");
 }
 
@@ -30,11 +31,14 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    // Swagger 
+    // Swagger kald
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Hvis nødvendigt, går til HTTPS istedet
 app.UseHttpsRedirection();
+// Kortlæg controller endpoints
+app.MapControllers();
 
 app.Run();

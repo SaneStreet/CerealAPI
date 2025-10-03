@@ -1,5 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
+/*
+    DbContext:
+        - "Broen" mellem kode og database
+        - Indeholder DbSet for hver tabel i DB (name, weight, rating, etc)
+        - Gemmer, henter og tracker ændringer i objekterne
+    En "ORM" motor til EF Core.
+*/
+
 public class CerealDbContext : DbContext
 {
 

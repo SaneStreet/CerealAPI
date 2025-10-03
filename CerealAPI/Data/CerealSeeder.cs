@@ -1,23 +1,33 @@
 using System.Globalization;
 
+/*
+    Seeder:
+        - Bruges til at fylde databasen med test- eller startdata, når API køres første gang.
+        - Gør udvikling og demo nemmere, da man ikke starter med en tom database
+*/
+
+
 public static class CerealSeeder
 {
     public static void SeedProducts(CerealDbContext context, string csvFilePath)
     {
-
+        // Hvis filen ikke eksistere, så kom med en fejl
         if (!File.Exists(csvFilePath))
             throw new FileNotFoundException("CSV filen blev ikke fundet", csvFilePath);
 
-        var lines = File.ReadAllLines(csvFilePath).Skip(2); // Skipper header
+        // Spring de første 2 linjer over (headers)
+        var lines = File.ReadAllLines(csvFilePath).Skip(2);
 
+        // For hver linje i filen, gør noget
         foreach (var line in lines)
         {
-
+            // Hver linje skal "starte forfra" når ; er nået
             var parts = line.Split(';');
-
+            // Hvis der er ugyldige rækker, så spring dem over
             if (parts.Length < 2)
-                continue; // spring over ugyldige rækker
+                continue;
 
+            // Et objekt der skal læses ind i DB
             var cereal = new Cereal
             {
                 Name = parts[0].Trim(),
@@ -46,6 +56,7 @@ public static class CerealSeeder
             }
         }
 
+        // Gem ændringerne
         context.SaveChanges();
     }
 }
