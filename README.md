@@ -1,19 +1,19 @@
-**🌾 CerealsAPI
+#🌾 CerealsAPI
 
 Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumentere den med Swagger.
 
-*🚀 Teknologier
+##🚀 Teknologier
 
 - ASP.NET Core Web API
 - Entity Framework Core
 - MySQL Workbench
 - Swagger / Swashbuckle
 
-*📦 Krav
+##📦 Krav
 - .NET 8 SDK
 - MySQL database (eller anden EF Core understøttet databadase)
 
-⚙️ Installation
+##⚙️ Installation
 
 1. Klon repoet:
 ```
@@ -34,7 +34,7 @@ dotnet ef database update
 ```
 dotnet run
 ```
-📖 Brug af Swagger
+##📖 Brug af Swagger
 
 Når API’et kører, kan du åbne:
 ```
@@ -42,7 +42,7 @@ https://localhost:5555/swagger
 ```
 Her kan du se og teste alle endpoints i browseren.
 
-🗂 Eksempel: Model og Endpoint
+##🗂 Eksempel: Model og Endpoint
 <b>Model (Cereal.cs)</b>:
 ```
 public class Cereal
@@ -70,7 +70,7 @@ public class CerealsController : ControllerBase
         => await _context.Cereals.ToListAsync();
 }
 ```
-🧪 Test
+##🧪 Test
 
 Kald API’et fra terminalen:
 ```
