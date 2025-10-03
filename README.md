@@ -1,8 +1,8 @@
-#🌾 CerealsAPI
+# 🌾 CerealsAPI
 
 Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumentere den med Swagger.
 
-##🚀 Teknologier
+## 🚀 Teknologier
 
 - ASP.NET Core Web API
 - Entity Framework Core
