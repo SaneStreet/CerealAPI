@@ -2,7 +2,7 @@
 
 Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumentere den med Swagger.
 
-## API Endpoints
+## 📡 API Endpoints
 | Metode | Endpoint            | Beskrivelse           | Body (JSON) eksempel                                 |
 | ------ | ------------------- | --------------------- | ---------------------------------------------------- |
 | GET    | `/api/cereals`      | Hent alle cereals     | –                                                    |
