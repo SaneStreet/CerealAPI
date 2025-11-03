@@ -2,7 +2,6 @@ DBParser/*
 CerealAPI/obj/*
 CerealAPI/bin/*
 CerealAPI/appsettings.Development.json
-Tester/*
 *.user
 *.suo
 *.userosscache

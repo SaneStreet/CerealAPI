@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,8 +16,30 @@ builder.Services.AddDbContext<CerealDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+// Docker urls
+builder.WebHost.UseUrls("http://+:5556");
+
 // Bygger applikationen
 var app = builder.Build();
+
+// 👇 Retry logic for MySQL
+var retries = 10;
+while (retries > 0)
+{
+    try
+    {
+        using var connection = new MySqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"));
+        connection.Open();
+        Console.WriteLine("Connected to MySQL!");
+        break;
+    }
+    catch
+    {
+        retries--;
+        Console.WriteLine("MySQL not ready, waiting 2s to retry...");
+        Thread.Sleep(2000);
+    }
+}
 
 // Sætter scope på hvilken database og migrationer der skal bruges
 using (var scope = app.Services.CreateScope())
