@@ -5,7 +5,7 @@ services:
     build: .
     container_name: cereal-api
     ports:
-      - "5556:5556"   # Docker API port
+      - "5556:5555"   # Docker API port
     depends_on:
       - db
     environment:

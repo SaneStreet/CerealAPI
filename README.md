@@ -3,13 +3,13 @@
 Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumentere den med Swagger.
 
 ## 📡 API Endpoints
-| Metode | Endpoint            | Beskrivelse           | Body (JSON) eksempel                                 |
-| ------ | ------------------- | --------------------- | ---------------------------------------------------- |
+| Metode | Endpoint           | Beskrivelse           | Body (JSON) eksempel                                 |
+| ------ | ------------------ | --------------------- | ---------------------------------------------------- |
 | GET    | `/api/Cereal`      | Hent alle cereals     | –                                                    |
-| GET    | `/api/Cereal/{id}` | Hent en cereal via Id | –                                                    |
+| GET    | `/api/Cereal/{id}` | Hent en cereal via Id | `{ "id": 15 }`                                       |
 | POST   | `/api/Cereal`      | Opret en ny cereal    | `{ "name": "Corn Flakes", "calories": 120 }`         |
 | PUT    | `/api/Cereal/{id}` | Opdater en cereal     | `{ "id": 1, "name": "Choco Pops", "calories": 200 }` |
-| DELETE | `/api/Cereal/{id}` | Slet en cereal        | –                                                    |
+| DELETE | `/api/Cereal/{id}` | Slet en cereal        | `{ "id": 37 }`                                       |
 
 ## 🚀 Teknologier
 
