@@ -75,7 +75,7 @@ environment:
 ports:
 - "3308:3306"   # Docker MySQL port
 ```
-Derefter kan de startes gennem Docker Desktop, eller med Docker CLI:
+Derefter kan de startes gennem Docker Desktop, eller med Docker CLI fra rod-mappen (samme sted som README):
 ```bash
 docker compose up --build
 ```
