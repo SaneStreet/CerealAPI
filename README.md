@@ -17,10 +17,13 @@ Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge 
 - Entity Framework Core
 - MySQL Workbench
 - Swagger / Swashbuckle
+- Docker Containerization (Valgfrit)
 
 ## 📦 Krav
 - .NET 9 SDK
 - MySQL database (eller anden EF Core understøttet databadase)
+- Docker (Valgfrit)
+- Docker Desktop (Valgfrit)
 
 ## ⚙️ Installation
 
@@ -52,7 +55,7 @@ https://localhost:5555/swagger
 ```
 Her kan du se og teste alle endpoints i browseren.
 
-## Dockerization
+## 🚢 Dockerization
 Gennemgå ```Dockerfile``` og ```docker-compose.yml``` for at sætte dine egne værdier:
 ### ```Dockerfile```
 ```bash Dockerfile
