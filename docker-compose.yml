@@ -9,7 +9,7 @@ services:
     depends_on:
       - db
     environment:
-      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=DATABASE NAME;User=USERNAME;Password=PASSWORD;
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=cerealdb;User=root;Password=123456;
       - ASPNETCORE_URLS=http://+:5556
       - DOTNET_ENVIRONMENT=Development
     restart: always
@@ -18,8 +18,8 @@ services:
     image: mysql:8.0.43
     container_name: cereal-db
     environment:
-      MYSQL_ROOT_PASSWORD: DockerizedPasswordHere
-      MYSQL_DATABASE: CerealDB
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: cerealdb
       MYSQL_ROOT_HOST: '%'
     ports:
       - "3308:3306"   # Docker MySQL port
