@@ -1,15 +1,15 @@
-# 🌾 CerealsAPI
+# 🌾 CerealAPI
 
 Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumentere den med Swagger.
 
 ## 📡 API Endpoints
 | Metode | Endpoint            | Beskrivelse           | Body (JSON) eksempel                                 |
 | ------ | ------------------- | --------------------- | ---------------------------------------------------- |
-| GET    | `/api/cereals`      | Hent alle cereals     | –                                                    |
-| GET    | `/api/cereals/{id}` | Hent en cereal via Id | –                                                    |
-| POST   | `/api/cereals`      | Opret en ny cereal    | `{ "name": "Corn Flakes", "calories": 120 }`         |
-| PUT    | `/api/cereals/{id}` | Opdater en cereal     | `{ "id": 1, "name": "Choco Pops", "calories": 200 }` |
-| DELETE | `/api/cereals/{id}` | Slet en cereal        | –                                                    |
+| GET    | `/api/Cereal`      | Hent alle cereals     | –                                                    |
+| GET    | `/api/Cereal/{id}` | Hent en cereal via Id | –                                                    |
+| POST   | `/api/Cereal`      | Opret en ny cereal    | `{ "name": "Corn Flakes", "calories": 120 }`         |
+| PUT    | `/api/Cereal/{id}` | Opdater en cereal     | `{ "id": 1, "name": "Choco Pops", "calories": 200 }` |
+| DELETE | `/api/Cereal/{id}` | Slet en cereal        | –                                                    |
 
 ## 🚀 Teknologier
 
@@ -26,17 +26,18 @@ Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge 
 
 1. Klon repoet:
 ```
-git clone https://github.com/brugernavn/CerealsAPI.git
-cd CerealsAPI
+git clone https://github.com/brugernavn/CerealAPI.git
+cd CerealAPI
 ```
 2. Tilføj database-forbindelse i ```appsettings.json``` :
 ```
 "ConnectionStrings": {
-    "DefaultConnection": "server=localhost;database=cerealsdb;user=root;password=dinKode"
+    "DefaultConnection": "server=localhost;database=cerealsdb;user=dinBruger;password=dinKode"
   }
 ```
-3. Kør database migrationer:
+3. Opret migrations og opdater databasen:
 ```
+dotnet ef add migrations initialCreate
 dotnet ef database update
 ```
 4. Start API'et enten i Visual Studio Run eller .NET CLI:
@@ -55,6 +56,6 @@ Her kan du se og teste alle endpoints i browseren.
 
 Kald API’et fra terminalen:
 ```
-curl https://localhost:5555/api/cereals
+curl https://localhost:5555/api/cereal
 ```
 Eller benyt Swagger til GET/POST requests.
