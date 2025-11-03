@@ -8,3 +8,4 @@ Tester/*
 *.userosscache
 *.sln.docstates
 *.vs/
+CerealAPI/Migrations
