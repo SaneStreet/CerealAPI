@@ -54,9 +54,11 @@ Her kan du se og teste alle endpoints i browseren.
 
 ## Dockerization
 Gennemgå ```Dockerfile``` og ```docker-compose.yml``` for at sætte dine egne værdier:
+### ```Dockerfile```
 ```bash Dockerfile
 EXPOSE 5556 # bruges i dette projekt
 ```
+### ```docker-compose.yml```
 ```bash docker-compose
 # Under api:
 ports:
