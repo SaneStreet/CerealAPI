@@ -26,8 +26,8 @@ Et simpelt ASP.NET Core Web API projekt, der demonstrerer hvordan man kan bygge 
 
 1. Klon repoet:
 ```
-git clone https://github.com/brugernavn/CerealsAPI.git
-cd CerealsAPI
+git clone https://github.com/brugernavn/CerealAPI.git
+cd CerealAPI
 ```
 2. Tilføj database-forbindelse i ```appsettings.json``` :
 ```
@@ -35,8 +35,9 @@ cd CerealsAPI
     "DefaultConnection": "server=localhost;database=cerealsdb;user=dinBruger;password=dinKode"
   }
 ```
-3. Kør database migrationer:
+3. Opret migrations og opdater databasen:
 ```
+dotnet ef add migrations initialCreate
 dotnet ef database update
 ```
 4. Start API'et enten i Visual Studio Run eller .NET CLI:
