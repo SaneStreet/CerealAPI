@@ -17,7 +17,7 @@ builder.Services.AddDbContext<CerealDbContext>(options =>
 });
 
 // Local API urls
-builder.WebHost.UseUrls("http://+:5555");
+builder.WebHost.UseUrls("http://+:5556");
 
 // Bygger applikationen
 var app = builder.Build();
