@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush() // aktiveres af webhook
-    }
-
     stages {
         stage('Checkout') {
             steps {
