@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/DIT_GITHUB_REPO_URL.git'
+                git branch: 'main', url: 'https://github.com/SaneStreet/CerealAPI.git'
             }
         }
 
