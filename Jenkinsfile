@@ -28,9 +28,11 @@ pipeline {
         }
 
         stage('Rebuild Containers') {
-            echo '♻️ Restarting Docker stack...'
-            sh 'docker compose down'
-            sh 'docker compose up -d --build'
+            steps {
+                echo '♻️ Restarting Docker stack...'
+                sh 'docker compose down'
+                sh 'docker compose up -d --build'
+            }
         }
     }
 }
@@ -39,7 +41,7 @@ post {
     success {
             echo '✅ CI/CD pipeline completed successfully!'
     }
-    
+
     failure {
         echo '❌ Build failed, check logs.'
     }
