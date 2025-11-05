@@ -16,8 +16,8 @@ builder.Services.AddDbContext<CerealDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
-// Docker urls
-builder.WebHost.UseUrls("http://+:5556");
+// Local API urls
+builder.WebHost.UseUrls("http://+:5555");
 
 // Bygger applikationen
 var app = builder.Build();
