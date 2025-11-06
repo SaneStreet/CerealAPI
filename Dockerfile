@@ -15,6 +15,6 @@ RUN dotnet publish -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
-ENV ASPNETCORE_URLS=http://+:5555
-EXPOSE 5555
+ENV ASPNETCORE_URLS=http://+:5556
+EXPOSE 5556
 ENTRYPOINT ["dotnet", "CerealAPI.dll"]
