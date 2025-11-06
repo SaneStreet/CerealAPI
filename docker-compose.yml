@@ -4,6 +4,8 @@ services:
     container_name: cereal-api
     ports:
       - "5556:5555"   # Docker API port
+    volumes:
+      - ./CerealAPI/Data:/app/Data
     depends_on:
       - db
     environment:
