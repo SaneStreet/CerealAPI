@@ -4,41 +4,40 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo '📥 Henter kode fra GitHub...'
                 git branch: 'main', url: 'https://github.com/SaneStreet/CerealAPI.git'
             }
         }
 
-        stage('Build .NET Project') {
+        stage('Build & Publish Docker Image') {
             steps {
-                echo '🏗️ Building .NET API...'
-                sh 'dotnet restore'
-                sh 'dotnet build --configuration Release'
+                echo '🏗️ Bygger Docker image...'
+                sh 'docker compose build --no-cache'
             }
         }
 
         stage('Run Tests') {
             steps {
-                echo '🧪 Running tests...'
-                sh 'dotnet test --no-build --verbosity normal'
+                echo '🧪 Kører .NET tests...'
+                sh 'docker run --rm cereal-api dotnet test --no-build --verbosity normal'
             }
         }
 
-        stage('Rebuild Containers') {
+        stage('Deploy Stack') {
             steps {
-                echo '♻️ Restarting Docker stack...'
+                echo '🚀 Starter stack...'
                 sh 'docker compose down'
-                sh 'docker compose up -d --build'
+                sh 'docker compose up -d'
             }
         }
     }
-}
 
-post {
-    success {
+    post {
+        success {
             echo '✅ CI/CD pipeline completed successfully!'
+        }
+        failure {
+            echo '❌ Build failed — check Jenkins logs.'
+        }
     }
-
-    failure {
-        echo '❌ Build failed, check logs.'
     }
-}
