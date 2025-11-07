@@ -2,6 +2,7 @@
 
 Et simpelt C# .NET 9 Web API projekt, der demonstrerer hvordan man kan bygge en REST API med Entity Framework Core og dokumenteres med Swagger UI.
 Derudover er der også mulighed for Dockerization, og CI/CD med Jenkins, i en samlet pakke med ```docker compose```.
+Projektet kan køres lokalt med ```dotnet run``` fra projektroden og Docker containers med ```docker compose up --build``` (```--build``` er til første gang man kører det)
 
 ---
 
@@ -14,7 +15,7 @@ CerealAPI/
 │   ├── 📁 Data/                  # CSV-fil og database seeder
 │   ├── 📁 Migrations/            # Entity Framework migrations
 │   ├── 📁 Models/                # Datamodeller
-│   ├── 📜 CerealAPI.csproj
+│   ├── 📜 CerealAPI.csproj       # C# projektfilen
 │   └── ⚙️ Program.cs             # Main entry point
 │
 ├── 🎼 docker-compose.yml         # Orkestrerer API, MySQL og Jenkins
@@ -41,19 +42,31 @@ CerealAPI/
 - Entity Framework Core
 - MySQL Workbench
 - Swagger / Swashbuckle
-- Docker Containerization (Valgfrit)
+- Docker Containers
+- Jenkins
 
 ---
 
-## 📦 Krav
-- .NET 9 SDK
-- MySQL database (eller anden EF Core understøttet database)
-- Docker (Valgfrit)
-- Docker Desktop (Valgfrit)
+## 🍽️ CSV-import og seeding
+
+Ved første opstart importerer API’et automatisk data fra Data/Cereal.csv til databasen.
+Dette håndteres af CerealSeeder under opstart:
+```bash 
+CerealSeeder.SeedProducts(context, "Data/Cereal.csv");
+```
+Hvis filen ikke findes, kaster den en exception f.eks.:
+```bash
+System.IO.FileNotFoundException: CSV filen blev ikke fundet
+```
+For at sikre adgang og at Docker faktisk kan finde filen tilføjes denne linje til ```docker-compose.yml```:
+```bash
+volumes:
+  - ./CerealApi/Data:/app/Data
+```
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation (Lokal Udvikling)
 
 1. Klon repoet:
 ```bash
@@ -86,7 +99,7 @@ http://localhost:5555/swagger
 ```
 Her kan ud teste alle endpoints til API'et i browseren.
 
-Hvis det skal køres i Docker er porten 5556: 
+Hvis det køres i Docker er porten 5556: 
 (Husk at tjekke om Docker containers kører før du går ind på adressen)
 ```bash
 http://localhost:5556/swagger
@@ -121,6 +134,47 @@ Derefter kan de startes gennem Docker Desktop, eller med Docker CLI fra rod-mapp
 ```bash
 docker compose up --build
 ```
+
+---
+
+## 🔄 CI/CD Pipeline
+Pipelinen (defineret i Jenkinsfile) består af fire hovedtrin:
+🧾 Checkout – Henter projektet fra GitHub
+🏗️ Build    – Genskaber og kompilerer .NET-projektet
+🧪 Test     – Kører enhedstests
+🚀 Deploy   – Genstarter containerne via Docker Compose
+
+---
+
+## 🧭 Continous Integration Flowchart (Rough sketch)
+```bash
+        ┌──────────────────────┐
+        │       GitHub         │
+        │    (CerealAPI Repo)  │
+        └──────────┬───────────┘
+                   │ Push / Commit
+                   ▼
+        ┌──────────────────────┐
+        │       Jenkins        │
+        │   CI/CD Pipeline     │
+        ├──────────────────────┤
+        │  1️⃣ Build & Test     │
+        │  2️⃣ Docker Compose   │
+        │  3️⃣ Deploy API       │
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌────────────────────────────┐
+        │        Docker Host         │
+        │                            │
+        │  🥣 CerealAPI | 🐬 MySQL  │
+        │                            │
+        │ Swagger → localhost:5556   │
+        └────────────────────────────┘
+
+```
+<b>Repo Flow:</b>
+Når der pushes ny kode til GitHub, trigger Jenkins pipelinen, der automatisk bygger, tester og genstarter hele miljøet i Docker. (I teorien)
 
 ---
 
