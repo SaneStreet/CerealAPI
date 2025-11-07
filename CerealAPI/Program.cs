@@ -30,13 +30,13 @@ while (retries > 0)
     {
         using var connection = new MySqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"));
         connection.Open();
-        Console.WriteLine("Connected to MySQL!");
+        Console.WriteLine(" 👌 Connected to MySQL! 👌");
         break;
     }
     catch
     {
         retries--;
-        Console.WriteLine("MySQL not ready, waiting 2s to retry...");
+        Console.WriteLine(" ⏳ MySQL not ready, waiting 2s to retry... ⏳ ");
         Thread.Sleep(2000);
     }
 }
