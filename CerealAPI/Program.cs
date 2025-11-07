@@ -5,21 +5,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-// Tilføjer Swagger Gen
+// Creates Swagger Gen
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// Henter ConnectionString
+// Gets ConnectionString
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-// Tilføjer DbContext med MySQL
+// Adds DbContext, using MySQL
 builder.Services.AddDbContext<CerealDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 // Local API urls
-builder.WebHost.UseUrls("http://+:5556");
+//builder.WebHost.UseUrls("http://+:5556");
 
-// Bygger applikationen
+// Builds the application
 var app = builder.Build();
 
 // 👇 Retry logic for MySQL
@@ -54,14 +54,14 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    // Swagger kald
+    // Swagger calls
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Hvis nødvendigt, går til HTTPS istedet
+// Use HTTPS, if necessary
 app.UseHttpsRedirection();
-// Kortlæg controller endpoints
+// Maps the controller endpoints
 app.MapControllers();
 
 app.Run();
