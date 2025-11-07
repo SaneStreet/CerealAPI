@@ -190,3 +190,9 @@ Kald Dockerized API i terminalen:
 ```bash
 curl http://localhost:5556/api/cereal
 ```
+
+---
+
+## 📋 Mulige udvidelser
+* Jenkins Agent (docker image)
+* Frontend (React?)
