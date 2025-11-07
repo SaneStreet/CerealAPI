@@ -12,7 +12,7 @@ pipeline {
         stage('Build & Publish Docker Image') {
             steps {
                 echo '🏗️ Bygger Docker image...'
-                sh 'docker compose build --no-cache'
+                sh 'docker compose build'
             }
         }
 
