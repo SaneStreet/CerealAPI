@@ -14,6 +14,9 @@ Når projektet køres i Docker med ```docker compose up --build``` så oprettes 
 
 ---
 
+## 🖼️ Frontend
+Når projektet kører enten lokalt eller gennem Docker containerization, kan det tilgås på ```http://localhost:5173```.
+
 ## 🗂️ Projektstruktur
 
 ```bash
