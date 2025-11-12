@@ -1,64 +1,86 @@
+version: "3.9"
+
 services:
   api:
-    build: .
+    build:
+      context: ./CerealAPI
+      dockerfile: Dockerfile
     container_name: cereal-api
     ports:
-    # Docker API port
       - "5556:5556"
     volumes:
-    # Docker Data folder volume
       - ./CerealAPI/Data:/app/Data
     depends_on:
       - db
     environment:
-    # Connection to MySQL for the API
+      # Connection to MySQL for the API
       - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=cerealdb;User=root;Password=123456;
       - ASPNETCORE_URLS=http://+:5556
+      - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_ENVIRONMENT=Development
-    restart: always
+    networks:
+      - cereal-net
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./CerealFrontEnd
+      dockerfile: Dockerfile
+    container_name: cereal-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./CerealFrontEnd:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - cereal-net
+    restart: unless-stopped
 
   db:
-    # MySQL image from Docker
     image: mysql:8.0.43
     container_name: cereal-db
     environment:
-    # Actual DB connection
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: cerealdb
       MYSQL_ROOT_HOST: '%'
     ports:
-    # Docker MySQL port
       - "3308:3306"
     volumes:
-    # Data fra DB stored in a volume
       - cereal-mysql-data:/var/lib/mysql
-    restart: always
+    networks:
+      - cereal-net
+    restart: unless-stopped
 
   jenkins:
-    # Jenkins image from Docker
     image: jenkins/jenkins:lts
     container_name: jenkins
-    restart: unless-stopped
     user: root
     ports:
-    # Jenkins ports in Docker
       - "8080:8080"
       - "50000:50000"
     volumes:
-    # Data from jenkins stored in volumes
-    - jenkins_home:/var/jenkins_home
-    - /var/run/docker.sock:/var/run/docker.sock    # 👈 Socket mount
-    - ./:/workspace  
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workspace
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     entrypoint: >
-      bash -c "apt-get update && configs:
+      bash -c "apt-get update &&
                apt-get install -y docker-cli &&
                exec /usr/local/bin/jenkins.sh"
     depends_on:
       - api
       - db
+    networks:
+      - cereal-net
+    restart: unless-stopped
 
 volumes:
   cereal-mysql-data:
   jenkins_home:
+
+networks:
+  cereal-net:
+    driver: bridge

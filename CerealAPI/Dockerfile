@@ -3,12 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # Kopiér csproj og hent dependencies
-COPY CerealAPI/*.csproj ./CerealAPI/
-RUN dotnet restore CerealAPI/CerealAPI.csproj
+COPY *.csproj ./
+RUN dotnet restore
 
 # Kopiér resten af koden og publish
-COPY CerealAPI/. ./CerealAPI/
-WORKDIR /src/CerealAPI
+COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
 # 2️⃣ Runtime stage
