@@ -8,3 +8,5 @@ CerealAPI/appsettings.Development.json
 *.sln.docstates
 *.vs/
 CerealAPI/Migrations
+*.log
+docker-compose.override.yml
