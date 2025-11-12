@@ -4,22 +4,34 @@ Et simpelt C# .NET 9 Web API projekt, der demonstrerer hvordan man kan bygge en 
 Derudover er der også mulighed for Dockerization, og CI/CD med Jenkins, i en samlet pakke med ```docker compose```.
 Projektet kan køres lokalt med ```dotnet run``` fra projektroden og Docker containers med ```docker compose up --build``` (```--build``` er til første gang man kører det)
 
+Når projektet køres i Docker med ```docker compose up --build``` så oprettes der 4 containere:
+```cereal-api```, ```cereal-db```, ```cereal-frontend```, og ```jenkins``` i én samlet compose
+
+```cereal-api``` er den container der holder på alt API funktionalitet. Som f.eks. Models, Controllers, Endpoints, etc.
+```cereal-db``` er en MySQL database instance.
+```cereal-frontend``` er React frontend der køres med Vite. Der er desuden hot-reload indbygget, så man ikke skal genstarte containere hver gang man ændre på koden.
+```jenkins``` er et CI/CD værktøj der kører i sin egen instance.
+
 ---
 
 ## 🗂️ Projektstruktur
 
 ```bash
 CerealAPI/
-├── 📂 CerealAPI/                 # Hovedprojektmappe
-│   ├── 📁 Controllers/           # API controllere
-│   ├── 📁 Data/                  # CSV-fil og database seeder
-│   ├── 📁 Migrations/            # Entity Framework migrations
-│   ├── 📁 Models/                # Datamodeller
-│   ├── 📜 CerealAPI.csproj       # C# projektfilen
-│   └── ⚙️ Program.cs             # Main entry point
-│
-├── 🎼 docker-compose.yml         # Orkestrerer API, MySQL og Jenkins
-├── 🐋 Dockerfile                 # Docker build for API
+├── 📂 CerealAPI/                 # API projektmappe
+│   ├── 📁 Controllers/             # API controllere
+│   ├── 📁 Data/                    # CSV-fil og database seeder
+│   ├── 📁 Migrations/              # Entity Framework migrations
+│   ├── 📁 Models/                  # Datamodeller
+│   ├── 📜 CerealAPI.csproj         # C# projektfilen
+├── ├── 🐋 Dockerfile               # Dockerfilen til API
+│   └── ⚙️ Program.cs               # Main entry point
+├── 📂 CerealFrontEnd/            # Frontend projektmappe
+│   ├── 📁 public/                  # Den "offentlige" mappe
+│   ├── 📁 src/                     # Resurse mappen
+├── ├── 🐋 Dockerfile               # Docker filen til Frontend
+│   └── ⚙️ Config-filer..           # En hel masse config filer
+├── 🎼 docker-compose.yml         # Orkestrerer API, MySQL, Frontend, og Jenkins
 └── 🤵🏻‍♂️ Jenkinsfile                # CI/CD pipeline konfiguration
 ```
 
@@ -44,6 +56,7 @@ CerealAPI/
 - Swagger / Swashbuckle
 - Docker Containers
 - Jenkins
+- React w. Vite & TypeScript
 
 ---
 
