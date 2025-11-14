@@ -32,6 +32,13 @@ CerealAPI/
 ├── 📂 CerealFrontEnd/            # Frontend projektmappe
 │   ├── 📁 public/                  # Den "offentlige" mappe
 │   ├── 📁 src/                     # Resurse mappen
+│   │    ├── 📁 api/                  # Indeholder API typing
+│   │    ├── 📁 assets/               # Diverse assets
+│   │    ├── 📁 components/           # Genbrugelige komponenter
+│   │    ├── 📁 pages/                # Alle siderne der loades
+│   │    ├── 🪨 App.tsx               # Filen hvor det hele køres (minimal size)
+│   │    ├── 📋 types.ts              # Typesætning til objekter (pt. kun Cereals) 
+│   │    └── 📋 Og mange flere filer... 
 ├── ├── 🐋 Dockerfile               # Docker filen til Frontend
 │   └── ⚙️ Config-filer..           # En hel masse config filer
 ├── 🎼 docker-compose.yml         # Orkestrerer API, MySQL, Frontend, og Jenkins
