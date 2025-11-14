@@ -8,7 +8,7 @@ export default function CreateCereal() {
   const handleCreate = async (data: any) => {
     await crtCereal(data);
     alert("Cereal created!");
-    navigate("/Cereal");
+    navigate("/cereals");
   };
 
   return (

@@ -39,7 +39,7 @@ export default function CerealDetail() {
       navigate("/cereals");
     } catch (error) {
       console.error(error);
-      alert("Kunne ikke slette cereal.");
+      alert("Could not delete cereal.");
     } finally {
       setShowConfirm(false);
       setIsDeleting(false);
@@ -57,8 +57,6 @@ export default function CerealDetail() {
         onSubmit={handleUpdate}
         submitLabel="Update"
       />
-
-      <hr className="my-6" />
 
       <button
         onClick={handleDelete}

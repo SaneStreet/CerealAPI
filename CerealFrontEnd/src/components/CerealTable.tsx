@@ -41,25 +41,29 @@ export default function CerealTable({ cereals }: { cereals: Cereal[] }) {
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#fefefe', e.currentTarget.style.color = '#000')}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent', e.currentTarget.style.color = '#fff')}
             >
-            <td className="border p-2"><Link to={`/cereals/${c.id}`} className="text-blue-600 underline">
-                {c.id}
-              </Link></td>
-            <td className="border p-2">{c.name}</td>
-            <td style={{ padding: '5px' }}>{c.mfr}</td>
-            <td style={{ padding: '5px' }}>{c.type}</td>
-            <td style={{ padding: '5px' }}>{c.calories}</td>
-            <td style={{ padding: '5px' }}>{c.protein}</td>
-            <td style={{ padding: '5px' }}>{c.fat}</td>
-            <td style={{ padding: '5px' }}>{c.sodium}</td>
-            <td style={{ padding: '5px' }}>{c.fiber}</td>
-            <td style={{ padding: '5px' }}>{c.carbo}</td>
-            <td style={{ padding: '5px' }}>{c.sugars}</td>
-            <td style={{ padding: '5px' }}>{c.potass}</td>
-            <td style={{ padding: '5px' }}>{c.vitamins}</td>
-            <td style={{ padding: '5px' }}>{c.shelf}</td>
-            <td style={{ padding: '5px' }}>{c.weight}</td>
-            <td style={{ padding: '5px' }}>{c.cups}</td>
-            <td style={{ padding: '5px' }}>{c.rating}</td>
+            <td className="border p-2">
+              <Link 
+                to={`/cereals/${c.id}`} 
+                className="text-blue-600 underline">
+                  {c.id}
+              </Link>
+            </td>
+            <td className="border-b-amber-400 p-2">{c.name}</td>
+            <td className="border-b-amber-400 p-2">{c.mfr}</td>
+            <td className="border-b-amber-400 p-2">{c.type}</td>
+            <td className="border-b-amber-400 p-2">{c.calories}</td>
+            <td className="border-b-amber-400 p-2">{c.protein}</td>
+            <td className="border-b-amber-400 p-2">{c.fat}</td>
+            <td className="border-b-amber-400 p-2">{c.sodium}</td>
+            <td className="border-b-amber-400 p-2">{c.fiber}</td>
+            <td className="border-b-amber-400 p-2">{c.carbo}</td>
+            <td className="border-b-amber-400 p-2">{c.sugars}</td>
+            <td className="border-b-amber-400 p-2">{c.potass}</td>
+            <td className="border-b-amber-400 p-2">{c.vitamins}</td>
+            <td className="border-b-amber-400 p-2">{c.shelf}</td>
+            <td className="border-b-amber-400 p-2">{c.weight}</td>
+            <td className="border-b-amber-400 p-2">{c.cups}</td>
+            <td className="border-b-amber-400 p-2">{c.rating}</td>
           </tr>
         ))}
       </tbody>
