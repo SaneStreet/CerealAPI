@@ -38,7 +38,7 @@ export default function CerealTable({ cereals }: { cereals: Cereal[] }) {
                     borderBottom: '1px solid #FABE19', 
                     transition: 'background-color 0.5s' 
                 }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#fefefe', e.currentTarget.style.color = '#000')}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#0963B6', e.currentTarget.style.color = '#000')}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent', e.currentTarget.style.color = '#fff')}
             >
             <td className="border p-2">

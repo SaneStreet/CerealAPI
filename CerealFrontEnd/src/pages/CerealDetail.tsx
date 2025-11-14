@@ -50,7 +50,7 @@ export default function CerealDetail() {
 
   return (
     <div className="p-8 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Edit Cereal #{id}</h2>
+      <h2 className="text-2xl font-bold mb-4">✍️ Edit Cereal #{id}</h2>
 
       <CerealForm
         initialData={cereal}

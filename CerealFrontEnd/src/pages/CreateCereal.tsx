@@ -13,7 +13,7 @@ export default function CreateCereal() {
 
   return (
     <div className="p-8 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Create New Cereal</h2>
+      <h2 className="text-2xl font-bold mb-4">🥣 Create New Cereal</h2>
       <CerealForm onSubmit={handleCreate} submitLabel="Create" />
     </div>
   );
